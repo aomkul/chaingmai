@@ -1,0 +1,257 @@
+                                                <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>🚗Yada Tourlist🚗</title>
+    </head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+ integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+ crossorigin="" />
+ 
+ <!-- W3 CSS template -->
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+ 
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+ crossorigin=""></script>
+ <style>
+ #mapid {
+ height: 800px;
+ }
+ </style>
+<body>
+<div class="w3-row">
+    <div id="mapid" class="w3-half"></div>
+    <div id="content" class="w3-half">
+    <table class="w3-table w3-striped">
+    <tr>
+    <th>ชื่อแหล่งท่องเที่ยว</th>
+    <th>ประเภท</th>
+    <th>ระดับ</th>
+    </tr>
+    <tr>
+    <td>น้ำตก A</td>
+    <td>ธรรมชาติ</td>
+    <td>A</td>
+    </tr>
+    </table>
+  </div>
+</div>
+<script>
+    var map = L.map("mapid").setView([17.53899785034393, 100.86130992069421], 8);
+    var tourpoint = 
+    {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "สวนสัตว์เชียงใหม่",
+        "type": "natural",
+        "level": 7
+      },
+      "geometry": {
+        "coordinates": [
+          98.9439795531805,
+          18.804383768665105
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ต๋องเต็มโต๊ะ",
+        "type": "special",
+        "level": 10
+      },
+      "geometry": {
+        "coordinates": [
+          98.96771965797535,
+          18.79663462646276
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "อุทยานดาราศาสตร์",
+        "type": "natural",
+        "level": 8
+      },
+      "geometry": {
+        "coordinates": [
+          98.95769063499858,
+          18.852674248623202
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "สวนพฤกษศาสตร์สมเด็จพระนางเจ้าสิริกิติ์",
+        "type": "natural",
+        "level": 8
+      },
+      "geometry": {
+        "coordinates": [
+          98.86060008774234,
+          18.890268296088692
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "วัดพระธาตุชุ่มเมือง",
+        "type": "culture",
+        "level": 8
+      },
+      "geometry": {
+        "coordinates": [
+          98.90072464517965,
+          18.921091867145577
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "วัดพระธาตุดอยสุเทพ",
+        "type": "culture",
+        "level": 9
+      },
+      "geometry": {
+        "coordinates": [
+          98.92213251852382,
+          18.804920719270967
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "วัดแสนเมืองมาหลวง",
+        "type": "culture",
+        "level": 10
+      },
+      "geometry": {
+        "coordinates": [
+          98.98634697019338,
+          18.793993662986026
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "อ่างแก้ว",
+        "type": "natural",
+        "level": 7
+      },
+      "geometry": {
+        "coordinates": [
+          98.94990215448098,
+          18.807071285936814
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "คลองแม่ข่า",
+        "type": "special",
+        "level": 10
+      },
+      "geometry": {
+        "coordinates": [
+          98.99860867472086,
+          18.781081901418304
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "โป่งแยง จังเกิ้ล",
+        "type": "natural",
+        "level": 10
+      },
+      "geometry": {
+        "coordinates": [
+          98.94053892326588,
+          18.870519781717576
+        ],
+        "type": "Point"
+      }
+    }
+  ]
+}
+
+
+ var osm = L.tileLayer(
+ "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+ ).addTo(map);
+ var gsat = L.tileLayer(
+ "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+ ).addTo(map);
+ 
+ var baseMaps = {
+ OSM: osm,
+ GoogleSat: gsat,
+ };
+ var tourLayer = L.geoJSON(tourpoint, {
+ pointToLayer: function (feature, latlng) {
+ return L.marker(latlng).bindPopup(feature.properties.name);
+ },
+ onEachFeature: function (feature, layer) {
+ layer.on("mouseover", function () {
+ document
+ .getElementById(feature.properties.name)
+ .classList.add("w3-red");
+ });
+ 
+ layer.on("mouseout", function () {
+ document
+ .getElementById(feature.properties.name)
+ .classList.remove("w3-red");
+ });
+ },
+ }).addTo(map);
+ 
+ var cont = "";
+ cont += "<table class='w3-table w3-striped'>";
+ cont += "<tr>";
+ cont += "<th>ชื่อแหล่งท่องเที่ยว</th>";
+ cont += "<th>ประเภท</th>";
+ cont += "<th>ระดับ</th>";
+ cont += "</tr>";
+ for (let i in tourpoint.features) {
+ cont += "<tr id=" + tourpoint.features[i].properties.name + ">";
+ cont += "<td>" + tourpoint.features[i].properties.name + "</td>";
+ cont += "<td>" + tourpoint.features[i].properties.type + "</td>";
+ cont += "<td>" + tourpoint.features[i].properties.level + "</td>";
+ cont += "</tr>";
+ }
+ cont += "</table>";
+ console.log(cont);
+ document.getElementById("content").innerHTML = cont;
+
+
+</script>
+
+
+
+
+
+
+</body>
